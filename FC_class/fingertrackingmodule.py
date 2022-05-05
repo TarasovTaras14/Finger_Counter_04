@@ -13,10 +13,10 @@ class fingerDetector():
         self.hands = self.mp_Hands.Hands(mode, maxHands, complexity, detectionCon, trackCon) # характирисетики для распознования hands
         self.mpDraw = mp.solutions.drawing_utils # иницилизация утилит для рисования hands
         self.fingertips = [4, 8, 12, 16, 20] # кончики fingers
-        self.handList = {}
-        self.fingers = {} # спсиок ok
+        self.handList = {} # координаты ключевых точек рук
+        self.fingers = {} # список ok
 
-    def findHands(self, img, draw=True):
+    def findHands(self, img, draw=False):
         RGB_image = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         RGB_image.flags.writeable = False
         self.result = self.hands.process(RGB_image)
@@ -87,7 +87,7 @@ def main():
             print('Не удалось получить кадр с web-камеры')
             continue
         image = cv2.flip(image, 1)
-        image = detector.findHands(image)
+        image = detector.findHands(image, True)
         if detector.result.multi_hand_landmarks:
             handCount = len(detector.result.multi_hand_landmarks)
             for i in range(handCount):
