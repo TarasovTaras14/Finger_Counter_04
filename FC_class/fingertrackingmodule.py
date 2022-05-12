@@ -63,7 +63,7 @@ class fingerDetector():
                             self.fingers[i].append(1)
                     if side == 'left':    
                         if self.handList[i][self.fingertips[0]][0] <  self.handList[i][self.fingertips[1]-1][0]:
-                            upCount += 1
+                            upCount += 19
                             self.fingers[i].append(1)
                         else:
                             self.fingers[i].append(0)
